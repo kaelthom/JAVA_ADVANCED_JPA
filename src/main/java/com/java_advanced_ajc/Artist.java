@@ -1,6 +1,7 @@
 package com.java_advanced_ajc;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ARTIST_TABLE")
@@ -10,6 +11,9 @@ public class Artist {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    @OneToOne
+    SacemRegistration sacemRegistration;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,5 +30,16 @@ public class Artist {
 
     @ManyToOne
     private Manager manager;
+
+    @ManyToOne
+    private Instrument favoriteInstrument;
+
+    @ManyToMany
+    @JoinTable(
+            name = "artist_to_inst",
+            joinColumns = {@JoinColumn(name = "instrument")},
+            inverseJoinColumns = {@JoinColumn(name = "artist")}
+    )
+    private List<Instrument> playableInstruments;
 
 }
