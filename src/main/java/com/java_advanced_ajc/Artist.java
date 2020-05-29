@@ -5,22 +5,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "ARTIST_TABLE")
-public class Artist {
+public class Artist extends Person{
 
     public Artist(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstName;
+        this.lastname = lastName;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    @Column(name = "FNAME")
-    private String firstName;
-
-    @Column(name = "LNAME")
-    private String lastName;
 
     @Column(name = "BNAME")
     private String bandName;
