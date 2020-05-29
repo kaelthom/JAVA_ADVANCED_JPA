@@ -13,12 +13,11 @@ public class SacemRegistration {
     @Column(unique = true)
     private String code;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
 
     @OneToOne(mappedBy = "sacemRegistration")
     Artist artist;
-
-
 
 }
