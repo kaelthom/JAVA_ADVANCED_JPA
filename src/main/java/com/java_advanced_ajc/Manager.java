@@ -8,6 +8,8 @@ import java.util.List;
 @Table(name = "MANAGER_TABLE")
 public class Manager extends Person{
 
+    private int budget = 0;
+
     @OneToMany(mappedBy = "manager")
     List<Artist> artists = new ArrayList<>();
 }
