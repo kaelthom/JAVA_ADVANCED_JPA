@@ -12,9 +12,6 @@ public class Artist {
         this.lastName = lastName;
     }
 
-    @OneToOne
-    SacemRegistration sacemRegistration;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -30,6 +27,9 @@ public class Artist {
 
     @ManyToOne
     private Manager manager;
+
+    @OneToOne
+    SacemRegistration sacemRegistration;
 
     @ManyToOne
     private Instrument favoriteInstrument;
