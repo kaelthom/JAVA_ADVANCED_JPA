@@ -28,6 +28,9 @@ public class Artist extends Person{
     @ManyToOne
     private Instrument favoriteInstrument;
 
+    @OneToMany(mappedBy = "artist")
+    private List<Media> medias;
+
     @ManyToMany
     @JoinTable(
             name = "artist_to_inst",
