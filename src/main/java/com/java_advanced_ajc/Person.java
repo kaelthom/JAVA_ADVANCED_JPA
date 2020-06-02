@@ -11,9 +11,13 @@ public abstract class Person {
     protected long id;
     protected String firstname;
     protected String lastname;
+
     public Person(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    protected Person() {
     }
 
     public long getId() {

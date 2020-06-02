@@ -37,6 +37,9 @@ public class Artist extends Person {
         this.bandName = bandName;
     }
 
+    public Artist() {
+    }
+
     public SacemRegistration getSacemRegistration() {
         return sacemRegistration;
     }
