@@ -2,13 +2,14 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
     <persistence-unit name="ecommerce" transaction-type="RESOURCE_LOCAL">
         <properties>
-            <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver" />
-            <property name="hibernate.connection.url" value="jdbc:derby:C:\\tools\\db-derby-10.14.2.0-bin\\db-derby-10.14.2.0-bin\\bin\\db/ecommerce" />
-            <property name="hibernate.connection.username" value="postgres" />
-            <property name="hibernate.connection.password" value="postgres" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <property name="hibernate.connection.url"
+                      value="jdbc:derby:C:\\tools\\db-derby-10.14.2.0-bin\\db-derby-10.14.2.0-bin\\bin\\db/ecommerce"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="postgres"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

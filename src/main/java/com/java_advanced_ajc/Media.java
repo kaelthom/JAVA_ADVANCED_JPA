@@ -15,6 +15,9 @@ public class Media implements Serializable {
     @ManyToOne
     private Artist artist;
 
+    public Media() {
+    }
+
     public Media(MediaId id) {
         this.id = id;
     }
