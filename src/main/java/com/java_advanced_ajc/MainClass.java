@@ -18,9 +18,23 @@ public class MainClass {
         Artist artist = new Artist("Toto", "Titi", "band1");
         em.persist(artist);
         System.out.println(em.contains(artist));
-        em.remove(artist);
-        System.out.println(em.contains(artist));
+//        em.remove(artist);
+//        System.out.println(em.contains(artist));
         transaction.commit();
+
+        transaction = em.getTransaction();
+        transaction.begin();
+        Media media = new Media(new MediaId("Media6", MediaType.DVD));
+        em.persist(media);
+        System.out.println(em.contains(media));
+        transaction.commit();
+
+        transaction = em.getTransaction();
+        transaction.begin();
+        Media media2 = em.find(Media.class, new MediaId("Media6", MediaType.DVD) );
+        System.out.println(media2);
+        transaction.commit();
+
 
         // .....
 // Closing the "EntityManager"
