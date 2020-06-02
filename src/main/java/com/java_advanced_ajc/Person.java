@@ -10,6 +10,11 @@ public abstract class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
 
+    public Person(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
     protected String firstname;
     protected String lastname;
 }

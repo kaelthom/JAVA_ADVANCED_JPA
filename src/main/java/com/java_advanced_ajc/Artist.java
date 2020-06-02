@@ -7,9 +7,9 @@ import java.util.List;
 @Table(name = "ARTIST_TABLE")
 public class Artist extends Person{
 
-    public Artist(String firstName, String lastName) {
-        this.firstname = firstName;
-        this.lastname = lastName;
+    public Artist(String firstName, String lastName, String bandName) {
+        super(firstName, lastName);
+        this.bandName = bandName;
     }
 
     @Id
