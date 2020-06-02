@@ -112,6 +112,16 @@ public class MainClass {
             }
             transaction.commit();
 
+            transaction = em.getTransaction();
+            transaction.begin();
+            Query queryNamed = em.createNamedQuery("findAllArtistsByInstrumentType");
+            query.setParameter("instrumentType", Instrument.InstrumentType.STRING);
+            artists = query.getResultList();
+            for (Artist artist1 : artists) {
+                System.out.println(artist1.getLastname());
+            }
+            transaction.commit();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

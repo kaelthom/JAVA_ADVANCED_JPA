@@ -6,6 +6,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "ARTIST_TABLE")
+@NamedQueries(
+        @NamedQuery(name = "findAllArtistsByInstrumentType",
+                query = "from Artist a where a.favoriteInstrument.instrumentType = :instrumentType")
+)
 public class Artist extends Person {
 
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "artist")
