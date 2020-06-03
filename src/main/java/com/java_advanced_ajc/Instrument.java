@@ -22,6 +22,9 @@ public class Instrument {
         this.instrumentType = instrumentType;
     }
 
+    public Instrument() {
+    }
+
     public List<Artist> getArtistsForWhichItsFavorite() {
         return artistsForWhichItsFavorite;
     }

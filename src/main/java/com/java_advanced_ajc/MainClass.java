@@ -68,7 +68,7 @@ public class MainClass {
             Instrument triangle = new Instrument("triangle", Instrument.InstrumentType.PERCUSSION);
             em.persist(triangle);
             artist2.setFavoriteInstrument(triangle);
-            SacemRegistration sacemReg = new SacemRegistration("sfml5kjf5555mk5j565", new Date());
+            SacemRegistration sacemReg = new SacemRegistration("sfml555kjf511555mk5j565", new Date());
             sacemReg = em.merge(sacemReg);
             sacemReg.setArtist(artist2);
             media3.setArtist(artist2);
@@ -156,6 +156,29 @@ public class MainClass {
                 System.out.println(artist1.getLastname());
             }
             transaction.commit();
+            em.close();
+
+
+            System.out.println("query with DAO and JPA or QueryDSL");
+            ArtistDAO artistDAO = new ArtistDAOQueryDSLImpl();
+            Artist artist1 = new Artist("Artist1", "GuitarGuy", "Group1");
+            artistDAO.create(artist1);
+
+            Instrument guitare2 = new Instrument("Guitare", Instrument.InstrumentType.STRING);
+            em = EMFSingleton.getInstance().createEntityManager();
+            transaction = em.getTransaction();
+            transaction.begin();
+            em.persist(guitare2);
+            artist1 = artistDAO.findAll().get(0);
+            artist1.setFavoriteInstrument(guitare2);
+            transaction.commit();
+            em.close();
+            artistDAO.update(artist1);
+
+
+            List<Artist> artists2 = artistDAO.findByInstrumentType(Instrument.InstrumentType.STRING);
+            artists2.forEach(artist4 -> System.out.println(artist4.getLastname()));
+
 
         } catch (Exception e) {
             e.printStackTrace();
