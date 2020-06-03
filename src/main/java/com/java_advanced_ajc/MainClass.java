@@ -1,6 +1,7 @@
 package com.java_advanced_ajc;
 
 import javax.persistence.*;
+import javax.persistence.criteria.*;
 import java.util.Date;
 import java.util.List;
 
@@ -102,6 +103,7 @@ public class MainClass {
             artist3.setSacemRegistration(scr);
             transaction.commit();
 
+            System.out.println("JPQL query");
             transaction = em.getTransaction();
             transaction.begin();
             Query query = em.createQuery("from Artist a where a.favoriteInstrument.instrumentType = :instrumentType");
@@ -112,11 +114,44 @@ public class MainClass {
             }
             transaction.commit();
 
+            System.out.println("JPQL named query");
             transaction = em.getTransaction();
             transaction.begin();
             Query queryNamed = em.createNamedQuery("findAllArtistsByInstrumentType");
-            query.setParameter("instrumentType", Instrument.InstrumentType.STRING);
-            artists = query.getResultList();
+            queryNamed.setParameter("instrumentType", Instrument.InstrumentType.STRING);
+            artists = queryNamed.getResultList();
+            for (Artist artist1 : artists) {
+                System.out.println(artist1.getLastname());
+            }
+            transaction.commit();
+
+            System.out.println("JPQL query with criteria builder");
+            transaction = em.getTransaction();
+            transaction.begin();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Artist> queryCriteria = cb.createQuery(Artist.class);
+            Root<Artist> queryRoot = queryCriteria.from(Artist.class);
+            queryCriteria.select(queryRoot);
+            Query criteriaQuery = em.createQuery(queryCriteria);
+
+            artists = criteriaQuery.getResultList();
+            for (Artist artist1 : artists) {
+                System.out.println(artist1.getLastname());
+            }
+            transaction.commit();
+
+            System.out.println("JPQL query with criteria builder and join");
+            transaction = em.getTransaction();
+            transaction.begin();
+            CriteriaQuery<Artist> queryCriteriaWhere = em.getCriteriaBuilder().createQuery(Artist.class);
+            Root<Artist> queryRootWhere = queryCriteriaWhere.from(Artist.class);
+            Join<Artist, Instrument> instJoin = queryRootWhere.join("favoriteInstrument");
+            ParameterExpression<Instrument.InstrumentType> param = cb.parameter(Instrument.InstrumentType.class);
+            queryCriteriaWhere.select(queryRootWhere).where(cb.equal(instJoin.get("instrumentType"), param));
+            Query criteriaQueryWhere = em.createQuery(queryCriteriaWhere);
+            criteriaQueryWhere.setParameter(param, Instrument.InstrumentType.STRING);
+            artists = criteriaQueryWhere.getResultList();
+
             for (Artist artist1 : artists) {
                 System.out.println(artist1.getLastname());
             }
